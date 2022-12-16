@@ -10,7 +10,7 @@
                     <div class="card-header d-flex align-items-center justify-content-between"><h5>{{ __('Mailables') }}</h5>
 
                         @if (!$mailables->isEmpty())
-                            <a class="btn btn-primary" href="#newMailableModal" data-toggle="modal" data-target="#newMailableModal">{{ __('Add Mailable') }}</a>
+                            <a class="btn btn-primary" href="#newMailableModal" data-toggle="modal" data-backdrop="false" data-target="#newMailableModal">{{ __('Add Mailable') }}</a>
                         @endif
                         <!-- Modal -->
                     </div>
@@ -19,7 +19,7 @@
 
                     @component('maileclipse::layout.emptydata')
 
-                        <span class="mt-4">{{ __("We didn't find anything - just empty space.") }}</span><button class="btn btn-primary mt-3" data-toggle="modal" data-target="#newMailableModal">{{ __('Add New Mailable') }}</button>
+                        <span class="mt-4">{{ __("We didn't find anything - just empty space.") }}</span><button class="btn btn-primary mt-3" data-toggle="modal" data-target="#newMailableModal" data-backdrop="false">{{ __('Add New Mailable') }}</button>
 
                     @endcomponent
 

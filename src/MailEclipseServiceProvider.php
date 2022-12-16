@@ -13,6 +13,8 @@ class MailEclipseServiceProvider extends ServiceProvider
      *
      * @return void
      */
+    public $routeFilePath = '/routes/maileclipse.php';
+
     public function boot()
     {
         Route::middlewareGroup('maileclipse', config('maileclipse.middlewares', []));
@@ -20,7 +22,6 @@ class MailEclipseServiceProvider extends ServiceProvider
         $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'maileclipse');
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'maileclipse');
         $this->registerRoutes();
-
         // Publishing is only necessary when using the CLI.
         if ($this->app->runningInConsole()) {
             $this->bootForConsole();
@@ -34,9 +35,21 @@ class MailEclipseServiceProvider extends ServiceProvider
      */
     private function registerRoutes()
     {
-        Route::group($this->routeConfiguration(), function () {
-            $this->loadRoutesFrom(__DIR__.'/Http/routes.php');
-        });
+        $routeFilePathInUse = __DIR__ . $this->routeFilePath;
+
+        if (file_exists(base_path() . $this->routeFilePath)) {
+            $routeFilePathInUse = base_path() . $this->routeFilePath;
+            $this->loadRoutesFrom($routeFilePathInUse);
+        }
+        else {
+            Route::group($this->routeConfiguration(), function () {
+                $this->loadRoutesFrom(__DIR__.'/Http/routes.php');
+            }); 
+        }
+
+        // Route::group($this->routeConfiguration(), function () {
+        //     $this->loadRoutesFrom(__DIR__.'/Http/routes.php');
+        // });
     }
 
     /**
@@ -86,6 +99,8 @@ class MailEclipseServiceProvider extends ServiceProvider
     protected function bootForConsole()
     {
         // Publishing the configuration file.
+        $this->publishes([__DIR__ . '/Http/routes.php' => base_path($this->routeFilePath)], 'routes');
+
         $this->publishes([
             __DIR__.'/../config/maileclipse.php' => config_path('maileclipse.php'),
         ], 'maileclipse.config');
@@ -97,6 +112,7 @@ class MailEclipseServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../resources/views/templates' => $this->app->resourcePath('views/vendor/maileclipse/templates'),
         ], 'maileclipse.templates');
+
 
         // Add Artisan publish command
         $this->commands([
