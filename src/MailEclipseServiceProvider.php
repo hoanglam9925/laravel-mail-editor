@@ -22,10 +22,12 @@ class MailEclipseServiceProvider extends ServiceProvider
         $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'maileclipse');
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'maileclipse');
         $this->registerRoutes();
+        $this->loadHelpers();
         // Publishing is only necessary when using the CLI.
         if ($this->app->runningInConsole()) {
             $this->bootForConsole();
         }
+        // View::addNamespace('maileclipse', __DIR__.'/../resources/views');
     }
 
     /**
@@ -51,7 +53,10 @@ class MailEclipseServiceProvider extends ServiceProvider
         //     $this->loadRoutesFrom(__DIR__.'/Http/routes.php');
         // });
     }
-
+    public function loadHelpers()
+    {
+        require_once __DIR__.'/helpers.php';
+    }
     /**
      * Get the Telescope route group configuration array.
      *
@@ -91,6 +96,8 @@ class MailEclipseServiceProvider extends ServiceProvider
         return ['maileclipse'];
     }
 
+    
+
     /**
      * Console-specific booting.
      *
@@ -120,3 +127,4 @@ class MailEclipseServiceProvider extends ServiceProvider
         ]);
     }
 }
+

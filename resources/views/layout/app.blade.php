@@ -1,6 +1,6 @@
-<!doctype html>
-<html lang="en">
+@extends(maileclipse_view('maileclipse-base'))
 
+@section('header')
 <head>
     <title>MailEclipse - @yield('title')</title>
     <!-- Required meta tags -->
@@ -44,7 +44,8 @@
     <script src="{{ asset('vendor/maileclipse/js/maileclipse-app.js') }}"></script>
 
 </head>
-
+@endsection
+@section('content')
 <body>
 
     @include('maileclipse::layout.header')
@@ -69,5 +70,4 @@
     </div>
 
 </body>
-
-</html>
+@endsection
