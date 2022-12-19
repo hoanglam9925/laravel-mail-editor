@@ -27,7 +27,6 @@ class MailEclipseServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->bootForConsole();
         }
-        // View::addNamespace('maileclipse', __DIR__.'/../resources/views');
     }
 
     /**
