@@ -266,18 +266,28 @@ New Structure:
 ### Fixes
 - Fixes an issue where in some cases Faker data would cause a issue for the javascript frontend. See #187 and #188 
 
+## Version 4.0.0
 
-## Version 3.5.2
+### Changed
 
-### Changes
+Laravel 9 Support
 
-- Adds the subject of the email client to the table instead of the namespace. See #79
+## Version 4.0.1
 
-### Fixes
+## Added
+- Improve error messages for event when a factory is not found when the setting is on to use them
 
-- Correct custom Mailable directory usage from config, see PR #190 @Bhagyrajaj
+## Version 4.0.2
 
-## Version 3.5.3
+## Added
+- Allow the subject to be displayed in the mailables table instead of Namespace values
 
-### Fixes
-- Syntax error in the `mailables.blade.php` file. #199, #200
+## Version 4.0.3
+
+## Fixed
+- Syntax error on the mailables.blade.php file. #199, #200
+
+## Version 4.0.4
+
+## Fixed
+- Laravel 9 mailables compatibility #218 and #219
