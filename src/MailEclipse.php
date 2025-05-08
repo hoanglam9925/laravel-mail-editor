@@ -720,6 +720,8 @@ class MailEclipse
 
         $mailableData = collect($classProps)->merge($withFuncData);
 
+        $mailableData = $mailableData->unique();
+
         $data = $mailableData->map(function ($parameter) use ($mailable_data) {
             return [
                 'key' => $parameter,
@@ -850,6 +852,7 @@ class MailEclipse
             $obj = self::buildMailable($instance);
             $viewData = $obj->buildViewData();
             $_data = array_merge($instance->buildViewData(), $viewData);
+            $_data = array_unique($_data);
 
             foreach ($_data as $key => $value) {
                 if (! is_object($value)) {
